@@ -9,6 +9,8 @@
 volatile bool running = true;
 
 sig_t addSignalHandler (int signum, void* handler) {
+    // NOTE: Manual specifies that signal() should be avoided.
+    //       sigaction should be used instead.
     sig_t res = signal(signum, handler);
     if (res == SIG_ERR) {
         syslog(LOG_ERR, "Error when adding signal handler: ");
