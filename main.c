@@ -34,11 +34,10 @@ void handler(int signum) {
 }
 
 int main(int argc, char* argv[]){
-    addSignalHandler(SIGQUIT, handler);
-
     setlogmask(LOG_UPTO(LOG_NOTICE));
     openlog(argv[0], LOG_CONS | LOG_PID | LOG_NDELAY, LOG_LOCAL1);
-    syslog(LOG_NOTICE, "Program started by User %d", getuid ());
+    
+    addSignalHandler(SIGQUIT, handler);
 
     while (running) {
         printf("working...\n");
